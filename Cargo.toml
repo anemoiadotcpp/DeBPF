@@ -1,0 +1,8 @@
+[package]
+name = "debpf"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+refpack = "5.0.3"
+
