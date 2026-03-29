@@ -14,8 +14,10 @@ struct FileData {
     compressed: bool  // [*] Whether or not the file is compressed.
 }
 
+/// The data included in the file which DeBPF returns to the host program.
 #[derive(Debug, Default)]
 pub struct ReturnData {
+    pub fsz: u32,
     pub tid: u32,
     pub gid: u32,
     pub iid: u64,
@@ -31,10 +33,9 @@ struct DBPFHeader {
     index_size: u32,   // How long is the index table?
 }
 
+/// Decompresses the DeBPF.
 pub fn decompress(fname: &str) -> Result<Vec<ReturnData>, Box<dyn Error>> {
-
     let data: Vec<u8> = read(fname)?;
-
     let mut hdr = DBPFHeader::default();
     
     parse_header(&mut hdr, &data)?;
@@ -158,7 +159,8 @@ fn parse_index_table(hdr: &mut DBPFHeader, data: &[u8]) -> Result<Vec<ReturnData
             tid: file.tid,
             gid: file.gid,
             iid: file.iid,
-            data: truedata
+            data: truedata,
+            fsz: file.fsz,
         };
 
         freturn.push(frd);

@@ -1,7 +1,18 @@
 [package]
 name = "debpf"
+authors = ["anemoiac"]
 version = "0.1.0"
+license = "GPL-3.0-or-later"
+description = "Decompiler and tool for Maxis' proprietary DBPF format."
+keywords = ["dbpf", "spore", "sims", "maxis"]
+exclude = ["target", "Cargo.lock"]
+readme = "README.md"
+repository = "https://github.com/anemoiadotcpp/DeBPF"
 edition = "2024"
+
+[lib]
+name = "debpf"
+path = "src/lib.rs"
 
 [dependencies]
 refpack = "5.0.3"
