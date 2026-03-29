@@ -15,5 +15,6 @@ name = "debpf"
 path = "src/lib.rs"
 
 [dependencies]
+flate2 = "1.1.9"
 refpack = "5.0.3"
 
