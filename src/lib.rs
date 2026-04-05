@@ -114,7 +114,6 @@ fn parse_index_table(hdr: &mut DBPFHeader, data: &[u8]) -> Result<Vec<ReturnData
         // And DBPF... Anything else doesn't! (i've only tested this with the spore galactic
         // adventures spec (3.0), so i can't verify this works in other games lol)
         itb.itbtype = u32::from_le_bytes(data[pointer..pointer + 4].try_into()?);
-        println!("itbtype {}", &itb.itbtype);
         match &itb.itbtype {
 
             4 => {
@@ -133,8 +132,6 @@ fn parse_index_table(hdr: &mut DBPFHeader, data: &[u8]) -> Result<Vec<ReturnData
                     if u16::from_le_bytes((data[pointer + 24..pointer + 26]).try_into()?) == 0xFFFF || u16::from_le_bytes((data[pointer + 24..pointer + 26]).try_into()?) == 0x5A42 {
                         itb.compressed = true;
                     }
-
-                    println!("cmprsd: {}", itb.compressed);
 
                     pointer += 28;
 
